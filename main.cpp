@@ -1,47 +1,50 @@
-#include "hydrometer.h"
 #include <iostream>
-#include <random>
+#include <iomanip>
 #include <chrono>
 #include <thread>
-#include <iomanip>
+#include <random>
+
+using namespace std;
 
 int main() {
-    Hydrometer h(50.0); // cada 50 ml conta 1 pulso
+    random_device rd;
+    mt19937 gen(rd());
 
-    std::random_device rd;
-    std::mt19937 gen(rd());
+    uniform_real_distribution<> consumo_dist(0.0, 2.0);
 
-    std::uniform_real_distribution<> flowDist(0.0, 120.0);
+    uniform_real_distribution<> pressao_dist(1.0, 4.0);
 
-    std::normal_distribution<> pressureDist(1.0, 0.1);
+    double total_litros = 0.0;
 
-    const double dt_s = 1.0;
-    long long time_s = 0;
-
-    std::cout << "time(s)\tflow(ml/h)\tpressure\tcumulative_ml\tpulses\n";
+    cout << fixed << setprecision(2);
+    cout << "simulador de hidrômetro iniciado...\n\n";
 
     while (true) {
-        double newFlow = flowDist(gen);
-        double newPressure = pressureDist(gen);
+        double consumo_inst = consumo_dist(gen);  // litros/s
+        double pressao = pressao_dist(gen);       // bar
 
-        h.setFlow(newFlow);
-        h.setPressure(newPressure);
+        total_litros += consumo_inst;
 
-        h.step(dt_s);
+        int metros_cubicos = static_cast<int>(total_litros / 1000);
+        int litros_restantes = static_cast<int>(total_litros) % 1000;
 
-        if (h.getFlow() < 0.1) {
-            std::cout << time_s << "\tSEM FLUXO DE AGUA\n";
-        } else {
-            std::cout << time_s << "\t"
-                      << std::fixed << std::setprecision(2)
-                      << h.getFlow() << "\t\t"
-                      << h.getPressure() << "\t\t"
-                      << h.getTotalMl() << "\t"
-                      << h.getPulses() << "\n";
-        }
+        // ponteiros auxiliares
+        int centenas = (litros_restantes / 100) % 10;
+        int dezenas  = (litros_restantes / 10) % 10;
+        int litros   = litros_restantes % 10;
+        int decimos  = static_cast<int>( (total_litros - static_cast<int>(total_litros)) * 10 );
 
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-        time_s += 1;
+        cout << "consumo instantâneo: " << consumo_inst << " L/s\n";
+        cout << "total acumulado: " << metros_cubicos << " m³ "
+             << litros_restantes << " L\n";
+        cout << "ponteiros -> centenas: " << centenas
+             << " | dezenas: " << dezenas
+             << " | litros: " << litros
+             << " | décimos: " << decimos << endl;
+        cout << "pressão da água: " << pressao << " bar\n";
+        cout << "-----------------------------\n";
+
+        this_thread::sleep_for(chrono::seconds(1));
     }
 
     return 0;
