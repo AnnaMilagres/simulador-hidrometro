@@ -19,9 +19,9 @@ args = "C++ Program"
 name = "C++ Program"
 author = "agent"
 
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "g++ -o main main.cpp && ./main"
-
 [workflows.workflow.metadata]
 outputType = "console"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "g++ -o main main.cpp hydrometer.cpp && ./main"
