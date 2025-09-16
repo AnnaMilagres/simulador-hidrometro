@@ -177,78 +177,139 @@ void drawText(Image &img, int x, int y, const std::string &text, u8 r=0,u8 g=0,u
     }
 }
 
-// render completo (labels + ponteiros + odometro)
+// substitua pela nova implementação abaixo (cole no renderer.cpp)
 void Renderer::renderHydrometerPNG(const std::string &filename, double totalLiters,
                                    int centenas, int dezenas, int litrosUnit, int decimos,
                                    double instantLps, double pressure) {
-    const int W = 700, H = 420;
+    // canvas maior
+    const int W = 1100;
+    const int H = 520;
     Image img(W,H,255,255,255);
 
-    // mostrador principal
-    int cx = 170, cy = 210, R = 140;
-    drawCircle(img, cx, cy, R, 30,30,30);
+    // ---- layout constants (ajuste à vontade) ----
+    const int margin = 40;
 
-    // ponteiro principal
-    int litersRest = static_cast<int>(std::fmod(totalLiters, 1000.0));
-    double angle = (-M_PI/2.0) + ( (double)litersRest / 1000.0 ) * (2*M_PI);
-    drawPointer(img, cx, cy, angle, R-25, 200,0,0);
+    // mostrador principal (esquerda)
+    const int cx = 240;
+    const int cy = 240;
+    const int R = 180;
 
-    // pequenos mostradores
-    int baseX = 380, baseY = 40;
-    int dR = 44;
-    int cx1 = baseX, cy1 = baseY + dR;
-    int cx2 = baseX + 110, cy2 = baseY + dR;
-    int cx3 = baseX + 220, cy3 = baseY + dR;
-    int cx4 = baseX + 330, cy4 = baseY + dR;
+    // pequenos mostradores (direita)
+    const int baseX = 540;
+    const int baseY = 60;
+    const int spacingX = 150;
+    const int dR = 52; // radius dos pequenos mostradores
 
-    auto drawSmall = [&](int cx,int cy,int value){
-        drawCircle(img, cx, cy, dR, 30,30,30);
-        double a = (-M_PI/2.0) + ( (double)value / 10.0 ) * (2*M_PI);
-        drawPointer(img, cx, cy, a, dR-12, 0,0,200);
+    // odometro (abaixo do mostrador principal)
+    const int odox = cx + 40;
+    const int odoy = cy + 120;
+
+    // barra de pressao (direita, com margem)
+    const int pbar_w = 22;
+    const int pbar_x = W - margin - pbar_w; // margem direita
+    const int pbar_y = H - 60;
+    const int pbar_h = 260;
+
+    // top instant consumption box (centralizada)
+    const int ibox_w = 700;
+    const int ibox_h = 30;
+    const int ibox_x = (W - ibox_w) / 2;
+    const int ibox_y = 18;
+
+    // ---- funções auxiliares rápidas locais ----
+    auto fillRect = [&](int x0,int y0,int w,int h, u8 r,u8 g,u8 b){
+        int x1 = x0 + w;
+        int y1 = y0 + h;
+        if (x0 < 0) x0 = 0; if (y0 < 0) y0 = 0;
+        if (x1 > img.w) x1 = img.w;
+        if (y1 > img.h) y1 = img.h;
+        for (int y=y0;y<y1;y++) for (int x=x0;x<x1;x++) img.setPixel(x,y,r,g,b);
     };
-    drawSmall(cx1,cy1, centenas);
-    drawSmall(cx2,cy2, dezenas);
-    drawSmall(cx3,cy3, litrosUnit);
-    drawSmall(cx4,cy4, decimos);
 
-    // odometro sete-seg (ultimos 6 digitos)
+    // ponteiro "grosso": desenha 3 linhas paralelas para dar espessura
+    auto drawThickPointer = [&](int cxp,int cyp,double angleRad,double length,u8 r,u8 g,u8 b){
+        // direção perpendicular
+        double px = -sin(angleRad);
+        double py = cos(angleRad);
+        double offsets[3] = {-1.4, 0.0, 1.4};
+        for (int i=0;i<3;i++) {
+            double ox = px * offsets[i];
+            double oy = py * offsets[i];
+            drawLine(img, cxp + ox, cyp + oy, cxp + cos(angleRad)*length + ox, cyp + sin(angleRad)*length + oy, r,g,b);
+        }
+    };
+
+    // ---- desenha mostrador principal ----
+    drawCircle(img, cx, cy, R, 40,40,40);
+
+    // ponteiro principal (fracao 0..999 -> -90..270 graus)
+    int litersRest = static_cast<int>(std::fmod(totalLiters, 1000.0));
+    double angle = (-M_PI/2.0) + ((double)litersRest / 1000.0) * (2*M_PI);
+    drawThickPointer(cx, cy, angle, R - 30, 180, 0, 0);
+
+    // rótulo dentro do mostrador (com fundo leve para não ficar perdido)
+    drawText(img, cx - 18, cy - 6, "LITROS");
+
+    // ---- pequenos mostradores (com espaçamento aumentado) ----
+    int cx1 = baseX;
+    int cx2 = baseX + spacingX;
+    int cx3 = baseX + spacingX * 2;
+    int cx4 = baseX + spacingX * 3;
+    int cySmall = baseY + dR;
+
+    auto drawSmall = [&](int cx_s, int cy_s, int value) {
+        drawCircle(img, cx_s, cy_s, dR, 40,40,40);
+        double a = (-M_PI/2.0) + ((double)value / 10.0) * (2*M_PI);
+        drawPointer(img, cx_s, cy_s, a, dR - 14, 0,0,180);
+    };
+    drawSmall(cx1, cySmall, centenas);
+    drawSmall(cx2, cySmall, dezenas);
+    drawSmall(cx3, cySmall, litrosUnit);
+    drawSmall(cx4, cySmall, decimos);
+
+    // labels pequenos com fundo
+    fillRect(cx1 - 32, cySmall + dR + 8, 90, 12, 240,240,240);
+    drawText(img, cx1 - 28, cySmall + dR + 8, "CENTENAS");
+    fillRect(cx2 - 32, cySmall + dR + 8, 90, 12, 240,240,240);
+    drawText(img, cx2 - 26, cySmall + dR + 8, "DEZENAS");
+    fillRect(cx3 - 24, cySmall + dR + 8, 80, 12, 240,240,240);
+    drawText(img, cx3 - 20, cySmall + dR + 8, "UNIDADES");
+    fillRect(cx4 - 32, cySmall + dR + 8, 110, 12, 240,240,240);
+    drawText(img, cx4 - 26, cySmall + dR + 8, "DECIMOS");
+
+    // ---- odometro (sete-seg) com fundo e borda para legibilidade ----
     int totalLitersInt = static_cast<int>(totalLiters);
-    int odox = 320, odoy = 220;
+    int odow = 6 * (12 + 5 + 6) + 10; // aproximado width
+    int odox_box = odox - 8;
+    int odoy_box = odoy - 10;
+    fillRect(odox_box - 6, odoy_box - 6, odow + 20, 46, 230,230,230);
     drawOdometer(img, odox, odoy, 6, 12, 5, 6, totalLitersInt);
+    drawText(img, odox - 40, odoy + 40, "TOTAL (L)");
 
-    // barra de pressao
-    int pbar_x = 560, pbar_y = 320, pbar_h = 220;
-    for (int y = pbar_y - pbar_h; y <= pbar_y; ++y) for (int x = pbar_x; x < pbar_x + 18; ++x) img.setPixel(x,y,230,230,230);
+    // ---- barra de pressao (visual) - com margem e fundo ----
+    fillRect(pbar_x - 26, pbar_y - pbar_h - 6, 74, pbar_h + 12, 240,240,240);
     double pct = (pressure - 1.0) / (4.0 - 1.0);
-    if (pct<0) pct=0; if (pct>1) pct=1;
-    int fillh = (int)(pbar_h * pct);
-    for (int y = pbar_y - fillh; y <= pbar_y; ++y) for (int x = pbar_x; x < pbar_x + 18; ++x) img.setPixel(x,y,40,160,40);
+    if (pct < 0) pct = 0; if (pct > 1) pct = 1;
+    int fillh = static_cast<int>(pbar_h * pct);
+    for (int y = pbar_y - fillh; y <= pbar_y; ++y)
+        for (int x = pbar_x; x < pbar_x + pbar_w; ++x)
+            img.setPixel(x,y,40,160,40);
+    drawText(img, pbar_x - 36, pbar_y + 8, "PRESSAO (BAR)");
 
-    // barra de consumo instantaneo (top)
-    int ibox_x = 60, ibox_y = 20, ibox_w = 520, ibox_h = 28;
-    for (int y=ibox_y; y<ibox_y+ibox_h; ++y) for (int x=ibox_x; x<ibox_x+ibox_w; ++x) img.setPixel(x,y,245,245,245);
+    // ---- barra de consumo instantaneo (top central) com label e fundo ----
+    fillRect(ibox_x, ibox_y, ibox_w, ibox_h, 245,245,245);
     double maxLps = 2.0;
     double prop = instantLps / maxLps; if (prop<0) prop=0; if (prop>1) prop=1;
-    int barW = (int)(ibox_w * prop);
-    for (int y=ibox_y+4; y<ibox_y+ibox_h-4; ++y) for (int x=ibox_x+4; x<ibox_x+4+barW; ++x) img.setPixel(x,y,200,50,50);
+    int barW = static_cast<int>(ibox_w * prop);
+    fillRect(ibox_x + 4, ibox_y + 4, barW, ibox_h - 8, 200,50,50);
+    drawText(img, ibox_x + 4, ibox_y + ibox_h + 6, "CONSUMO (L/S)");
 
-    // labels explicativos (usar apenas maiusculas sem acento)
-    drawText(img, 40, 360, "TOTAL (L)");
-    drawText(img, 320, 200, "ODOMETRO (L)");
-    drawText(img, 120, 140, "LITROS");
-    drawText(img, cx1 - 30, cy1 + 55, "CENTENAS DE LITRO");
-    drawText(img, cx2 - 30, cy2 + 55, "DEZENAS DE LITRO");
-    drawText(img, cx3 - 30, cy3 + 55, "LITROS (UN)");
-    drawText(img, cx4 - 30, cy4 + 55, "DECIMOS DE LITRO");
-    drawText(img, pbar_x - 40, pbar_y + 10, "PRESSAO (BAR)");
-    drawText(img, ibox_x + 2, ibox_y + ibox_h + 4, "CONSUMO INSTANTANEO (L/S)");
+    // ---- small numeric overlays: instant consumption (left) and pressure (near bar) ----
+    int inst_int = static_cast<int>(instantLps * 100.0); // centesimos
+    drawOdometer(img, 40, 50, 4, 8, 3, 3, inst_int);
+    int press_int = static_cast<int>(pressure * 10.0); // decimos
+    drawOdometer(img, pbar_x - 46, 40, 3, 8, 3, 3, press_int);
 
-    // numeric overlays (pequenos) - instant e pressao
-    int inst_int = static_cast<int>(instantLps * 100); // centesimos
-    drawOdometer(img, 60, 60, 5, 6, 3, 3, inst_int);
-    int press_int = static_cast<int>(pressure * 10); // decimos
-    drawOdometer(img, 560, 40, 3, 8, 3, 3, press_int);
-
-    // salvar png
+    // ---- salvar png ----
     stbi_write_png(filename.c_str(), img.w, img.h, 3, img.data.data(), img.w*3);
 }

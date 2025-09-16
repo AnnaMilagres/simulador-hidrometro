@@ -1,0 +1,332 @@
+In file included from renderer.cpp:321:
+stb_image_write.h:255:5: error: redefinition of ‘int stbi_write_png_compression_level’
+  255 | int stbi_write_png_compression_level = 8;
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from renderer.cpp:10:
+stb_image_write.h:255:5: note: ‘int stbi_write_png_compression_level’ previously defined here
+  255 | int stbi_write_png_compression_level = 8;
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:256:5: error: redefinition of ‘int stbi_write_tga_with_rle’
+  256 | int stbi_write_tga_with_rle = 1;
+      |     ^~~~~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:256:5: note: ‘int stbi_write_tga_with_rle’ previously defined here
+  256 | int stbi_write_tga_with_rle = 1;
+      |     ^~~~~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:257:5: error: redefinition of ‘int stbi_write_force_png_filter’
+  257 | int stbi_write_force_png_filter = -1;
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:257:5: note: ‘int stbi_write_force_png_filter’ previously defined here
+  257 | int stbi_write_force_png_filter = -1;
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:260:12: error: redefinition of ‘int stbi__flip_vertically_on_write’
+  260 | static int stbi__flip_vertically_on_write = 0;
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:260:12: note: ‘int stbi__flip_vertically_on_write’ previously defined here
+  260 | static int stbi__flip_vertically_on_write = 0;
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:262:15: error: redefinition of ‘void stbi_flip_vertically_on_write(int)’
+  262 | STBIWDEF void stbi_flip_vertically_on_write(int flag)
+      |               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:262:15: note: ‘void stbi_flip_vertically_on_write(int)’ previously defined here
+  262 | STBIWDEF void stbi_flip_vertically_on_write(int flag)
+      |               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:273:3: error: conflicting declaration ‘typedef struct stbi__write_context stbi__write_context’
+  273 | } stbi__write_context;
+      |   ^~~~~~~~~~~~~~~~~~~
+stb_image_write.h:273:3: note: previous declaration as ‘typedef struct stbi__write_context stbi__write_context’
+  273 | } stbi__write_context;
+      |   ^~~~~~~~~~~~~~~~~~~
+stb_image_write.h:276:13: error: redefinition of ‘void stbi__start_write_callbacks(stbi__write_context*, void (*)(void*, void*, int), void*)’
+  276 | static void stbi__start_write_callbacks(stbi__write_context *s, stbi_write_func *c, void *context)
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:276:13: note: ‘void stbi__start_write_callbacks(stbi__write_context*, void (*)(void*, void*, int), void*)’ previously defined here
+  276 | static void stbi__start_write_callbacks(stbi__write_context *s, stbi_write_func *c, void *context)
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:284:13: error: redefinition of ‘void stbi__stdio_write(void*, void*, int)’
+  284 | static void stbi__stdio_write(void *context, void *data, int size)
+      |             ^~~~~~~~~~~~~~~~~
+stb_image_write.h:284:13: note: ‘void stbi__stdio_write(void*, void*, int)’ previously defined here
+  284 | static void stbi__stdio_write(void *context, void *data, int size)
+      |             ^~~~~~~~~~~~~~~~~
+stb_image_write.h:304:14: error: redefinition of ‘FILE* stbiw__fopen(const char*, const char*)’
+  304 | static FILE *stbiw__fopen(char const *filename, char const *mode)
+      |              ^~~~~~~~~~~~
+stb_image_write.h:304:14: note: ‘FILE* stbiw__fopen(const char*, const char*)’ previously defined here
+  304 | static FILE *stbiw__fopen(char const *filename, char const *mode)
+      |              ^~~~~~~~~~~~
+stb_image_write.h:332:12: error: redefinition of ‘int stbi__start_write_file(stbi__write_context*, const char*)’
+  332 | static int stbi__start_write_file(stbi__write_context *s, const char *filename)
+      |            ^~~~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:332:12: note: ‘int stbi__start_write_file(stbi__write_context*, const char*)’ previously defined here
+  332 | static int stbi__start_write_file(stbi__write_context *s, const char *filename)
+      |            ^~~~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:339:13: error: redefinition of ‘void stbi__end_write_file(stbi__write_context*)’
+  339 | static void stbi__end_write_file(stbi__write_context *s)
+      |             ^~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:339:13: note: ‘void stbi__end_write_file(stbi__write_context*)’ previously defined here
+  339 | static void stbi__end_write_file(stbi__write_context *s)
+      |             ^~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:349:13: error: redefinition of ‘void stbiw__writefv(stbi__write_context*, const char*, __va_list_tag*)’
+  349 | static void stbiw__writefv(stbi__write_context *s, const char *fmt, va_list v)
+      |             ^~~~~~~~~~~~~~
+stb_image_write.h:349:13: note: ‘void stbiw__writefv(stbi__write_context*, const char*, __va_list_tag*)’ previously defined here
+  349 | static void stbiw__writefv(stbi__write_context *s, const char *fmt, va_list v)
+      |             ^~~~~~~~~~~~~~
+stb_image_write.h:378:13: error: redefinition of ‘void stbiw__writef(stbi__write_context*, const char*, ...)’
+  378 | static void stbiw__writef(stbi__write_context *s, const char *fmt, ...)
+      |             ^~~~~~~~~~~~~
+stb_image_write.h:378:13: note: ‘void stbiw__writef(stbi__write_context*, const char*, ...)’ previously defined here
+  378 | static void stbiw__writef(stbi__write_context *s, const char *fmt, ...)
+      |             ^~~~~~~~~~~~~
+stb_image_write.h:386:13: error: redefinition of ‘void stbiw__write_flush(stbi__write_context*)’
+  386 | static void stbiw__write_flush(stbi__write_context *s)
+      |             ^~~~~~~~~~~~~~~~~~
+stb_image_write.h:386:13: note: ‘void stbiw__write_flush(stbi__write_context*)’ previously defined here
+  386 | static void stbiw__write_flush(stbi__write_context *s)
+      |             ^~~~~~~~~~~~~~~~~~
+stb_image_write.h:394:13: error: redefinition of ‘void stbiw__putc(stbi__write_context*, unsigned char)’
+  394 | static void stbiw__putc(stbi__write_context *s, unsigned char c)
+      |             ^~~~~~~~~~~
+stb_image_write.h:394:13: note: ‘void stbiw__putc(stbi__write_context*, unsigned char)’ previously defined here
+  394 | static void stbiw__putc(stbi__write_context *s, unsigned char c)
+      |             ^~~~~~~~~~~
+stb_image_write.h:399:13: error: redefinition of ‘void stbiw__write1(stbi__write_context*, unsigned char)’
+  399 | static void stbiw__write1(stbi__write_context *s, unsigned char a)
+      |             ^~~~~~~~~~~~~
+stb_image_write.h:399:13: note: ‘void stbiw__write1(stbi__write_context*, unsigned char)’ previously defined here
+  399 | static void stbiw__write1(stbi__write_context *s, unsigned char a)
+      |             ^~~~~~~~~~~~~
+stb_image_write.h:406:13: error: redefinition of ‘void stbiw__write3(stbi__write_context*, unsigned char, unsigned char, unsigned char)’
+  406 | static void stbiw__write3(stbi__write_context *s, unsigned char a, unsigned char b, unsigned char c)
+      |             ^~~~~~~~~~~~~
+stb_image_write.h:406:13: note: ‘void stbiw__write3(stbi__write_context*, unsigned char, unsigned char, unsigned char)’ previously defined here
+  406 | static void stbiw__write3(stbi__write_context *s, unsigned char a, unsigned char b, unsigned char c)
+      |             ^~~~~~~~~~~~~
+stb_image_write.h:418:13: error: redefinition of ‘void stbiw__write_pixel(stbi__write_context*, int, int, int, int, unsigned char*)’
+  418 | static void stbiw__write_pixel(stbi__write_context *s, int rgb_dir, int comp, int write_alpha, int expand_mono, unsigned char *d)
+      |             ^~~~~~~~~~~~~~~~~~
+stb_image_write.h:418:13: note: ‘void stbiw__write_pixel(stbi__write_context*, int, int, int, int, unsigned char*)’ previously defined here
+  418 | static void stbiw__write_pixel(stbi__write_context *s, int rgb_dir, int comp, int write_alpha, int expand_mono, unsigned char *d)
+      |             ^~~~~~~~~~~~~~~~~~
+stb_image_write.h:451:13: error: redefinition of ‘void stbiw__write_pixels(stbi__write_context*, int, int, int, int, int, void*, int, int, int)’
+  451 | static void stbiw__write_pixels(stbi__write_context *s, int rgb_dir, int vdir, int x, int y, int comp, void *data, int write_alpha, int scanline_pad, int expand_mono)
+      |             ^~~~~~~~~~~~~~~~~~~
+stb_image_write.h:451:13: note: ‘void stbiw__write_pixels(stbi__write_context*, int, int, int, int, int, void*, int, int, int)’ previously defined here
+  451 | static void stbiw__write_pixels(stbi__write_context *s, int rgb_dir, int vdir, int x, int y, int comp, void *data, int write_alpha, int scanline_pad, int expand_mono)
+      |             ^~~~~~~~~~~~~~~~~~~
+stb_image_write.h:478:12: error: redefinition of ‘int stbiw__outfile(stbi__write_context*, int, int, int, int, int, int, void*, int, int, const char*, ...)’
+  478 | static int stbiw__outfile(stbi__write_context *s, int rgb_dir, int vdir, int x, int y, int comp, int expand_mono, void *data, int alpha, int pad, const char *fmt, ...)
+      |            ^~~~~~~~~~~~~~
+stb_image_write.h:478:12: note: ‘int stbiw__outfile(stbi__write_context*, int, int, int, int, int, int, void*, int, int, const char*, ...)’ previously defined here
+  478 | static int stbiw__outfile(stbi__write_context *s, int rgb_dir, int vdir, int x, int y, int comp, int expand_mono, void *data, int alpha, int pad, const char *fmt, ...)
+      |            ^~~~~~~~~~~~~~
+stb_image_write.h:492:12: error: redefinition of ‘int stbi_write_bmp_core(stbi__write_context*, int, int, int, const void*)’
+  492 | static int stbi_write_bmp_core(stbi__write_context *s, int x, int y, int comp, const void *data)
+      |            ^~~~~~~~~~~~~~~~~~~
+stb_image_write.h:492:12: note: ‘int stbi_write_bmp_core(stbi__write_context*, int, int, int, const void*)’ previously defined here
+  492 | static int stbi_write_bmp_core(stbi__write_context *s, int x, int y, int comp, const void *data)
+      |            ^~~~~~~~~~~~~~~~~~~
+stb_image_write.h:512:14: error: redefinition of ‘int stbi_write_bmp_to_func(void (*)(void*, void*, int), void*, int, int, int, const void*)’
+  512 | STBIWDEF int stbi_write_bmp_to_func(stbi_write_func *func, void *context, int x, int y, int comp, const void *data)
+      |              ^~~~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:512:14: note: ‘int stbi_write_bmp_to_func(void (*)(void*, void*, int), void*, int, int, int, const void*)’ previously defined here
+  512 | STBIWDEF int stbi_write_bmp_to_func(stbi_write_func *func, void *context, int x, int y, int comp, const void *data)
+      |              ^~~~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:520:14: error: redefinition of ‘int stbi_write_bmp(const char*, int, int, int, const void*)’
+  520 | STBIWDEF int stbi_write_bmp(char const *filename, int x, int y, int comp, const void *data)
+      |              ^~~~~~~~~~~~~~
+stb_image_write.h:520:14: note: ‘int stbi_write_bmp(const char*, int, int, int, const void*)’ previously defined here
+  520 | STBIWDEF int stbi_write_bmp(char const *filename, int x, int y, int comp, const void *data)
+      |              ^~~~~~~~~~~~~~
+stb_image_write.h:532:12: error: redefinition of ‘int stbi_write_tga_core(stbi__write_context*, int, int, int, void*)’
+  532 | static int stbi_write_tga_core(stbi__write_context *s, int x, int y, int comp, void *data)
+      |            ^~~~~~~~~~~~~~~~~~~
+stb_image_write.h:532:12: note: ‘int stbi_write_tga_core(stbi__write_context*, int, int, int, void*)’ previously defined here
+  532 | static int stbi_write_tga_core(stbi__write_context *s, int x, int y, int comp, void *data)
+      |            ^~~~~~~~~~~~~~~~~~~
+stb_image_write.h:611:14: error: redefinition of ‘int stbi_write_tga_to_func(void (*)(void*, void*, int), void*, int, int, int, const void*)’
+  611 | STBIWDEF int stbi_write_tga_to_func(stbi_write_func *func, void *context, int x, int y, int comp, const void *data)
+      |              ^~~~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:611:14: note: ‘int stbi_write_tga_to_func(void (*)(void*, void*, int), void*, int, int, int, const void*)’ previously defined here
+  611 | STBIWDEF int stbi_write_tga_to_func(stbi_write_func *func, void *context, int x, int y, int comp, const void *data)
+      |              ^~~~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:619:14: error: redefinition of ‘int stbi_write_tga(const char*, int, int, int, const void*)’
+  619 | STBIWDEF int stbi_write_tga(char const *filename, int x, int y, int comp, const void *data)
+      |              ^~~~~~~~~~~~~~
+stb_image_write.h:619:14: note: ‘int stbi_write_tga(const char*, int, int, int, const void*)’ previously defined here
+  619 | STBIWDEF int stbi_write_tga(char const *filename, int x, int y, int comp, const void *data)
+      |              ^~~~~~~~~~~~~~
+stb_image_write.h:639:13: error: redefinition of ‘void stbiw__linear_to_rgbe(unsigned char*, float*)’
+  639 | static void stbiw__linear_to_rgbe(unsigned char *rgbe, float *linear)
+      |             ^~~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:639:13: note: ‘void stbiw__linear_to_rgbe(unsigned char*, float*)’ previously defined here
+  639 | static void stbiw__linear_to_rgbe(unsigned char *rgbe, float *linear)
+      |             ^~~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:656:13: error: redefinition of ‘void stbiw__write_run_data(stbi__write_context*, int, unsigned char)’
+  656 | static void stbiw__write_run_data(stbi__write_context *s, int length, unsigned char databyte)
+      |             ^~~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:656:13: note: ‘void stbiw__write_run_data(stbi__write_context*, int, unsigned char)’ previously defined here
+  656 | static void stbiw__write_run_data(stbi__write_context *s, int length, unsigned char databyte)
+      |             ^~~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:664:13: error: redefinition of ‘void stbiw__write_dump_data(stbi__write_context*, int, unsigned char*)’
+  664 | static void stbiw__write_dump_data(stbi__write_context *s, int length, unsigned char *data)
+      |             ^~~~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:664:13: note: ‘void stbiw__write_dump_data(stbi__write_context*, int, unsigned char*)’ previously defined here
+  664 | static void stbiw__write_dump_data(stbi__write_context *s, int length, unsigned char *data)
+      |             ^~~~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:672:13: error: redefinition of ‘void stbiw__write_hdr_scanline(stbi__write_context*, int, int, unsigned char*, float*)’
+  672 | static void stbiw__write_hdr_scanline(stbi__write_context *s, int width, int ncomp, unsigned char *scratch, float *scanline)
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:672:13: note: ‘void stbiw__write_hdr_scanline(stbi__write_context*, int, int, unsigned char*, float*)’ previously defined here
+  672 | static void stbiw__write_hdr_scanline(stbi__write_context *s, int width, int ncomp, unsigned char *scratch, float *scanline)
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:761:12: error: redefinition of ‘int stbi_write_hdr_core(stbi__write_context*, int, int, int, float*)’
+  761 | static int stbi_write_hdr_core(stbi__write_context *s, int x, int y, int comp, float *data)
+      |            ^~~~~~~~~~~~~~~~~~~
+stb_image_write.h:761:12: note: ‘int stbi_write_hdr_core(stbi__write_context*, int, int, int, float*)’ previously defined here
+  761 | static int stbi_write_hdr_core(stbi__write_context *s, int x, int y, int comp, float *data)
+      |            ^~~~~~~~~~~~~~~~~~~
+stb_image_write.h:787:14: error: redefinition of ‘int stbi_write_hdr_to_func(void (*)(void*, void*, int), void*, int, int, int, const float*)’
+  787 | STBIWDEF int stbi_write_hdr_to_func(stbi_write_func *func, void *context, int x, int y, int comp, const float *data)
+      |              ^~~~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:787:14: note: ‘int stbi_write_hdr_to_func(void (*)(void*, void*, int), void*, int, int, int, const float*)’ previously defined here
+  787 | STBIWDEF int stbi_write_hdr_to_func(stbi_write_func *func, void *context, int x, int y, int comp, const float *data)
+      |              ^~~~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:794:14: error: redefinition of ‘int stbi_write_hdr(const char*, int, int, int, const float*)’
+  794 | STBIWDEF int stbi_write_hdr(char const *filename, int x, int y, int comp, const float *data)
+      |              ^~~~~~~~~~~~~~
+stb_image_write.h:794:14: note: ‘int stbi_write_hdr(const char*, int, int, int, const float*)’ previously defined here
+  794 | STBIWDEF int stbi_write_hdr(char const *filename, int x, int y, int comp, const float *data)
+      |              ^~~~~~~~~~~~~~
+stb_image_write.h:826:14: error: redefinition of ‘void* stbiw__sbgrowf(void**, int, int)’
+  826 | static void *stbiw__sbgrowf(void **arr, int increment, int itemsize)
+      |              ^~~~~~~~~~~~~~
+stb_image_write.h:826:14: note: ‘void* stbiw__sbgrowf(void**, int, int)’ previously defined here
+  826 | static void *stbiw__sbgrowf(void **arr, int increment, int itemsize)
+      |              ^~~~~~~~~~~~~~
+stb_image_write.h:839:23: error: redefinition of ‘unsigned char* stbiw__zlib_flushf(unsigned char*, unsigned int*, int*)’
+  839 | static unsigned char *stbiw__zlib_flushf(unsigned char *data, unsigned int *bitbuffer, int *bitcount)
+      |                       ^~~~~~~~~~~~~~~~~~
+stb_image_write.h:839:23: note: ‘unsigned char* stbiw__zlib_flushf(unsigned char*, unsigned int*, int*)’ previously defined here
+  839 | static unsigned char *stbiw__zlib_flushf(unsigned char *data, unsigned int *bitbuffer, int *bitcount)
+      |                       ^~~~~~~~~~~~~~~~~~
+stb_image_write.h:849:12: error: redefinition of ‘int stbiw__zlib_bitrev(int, int)’
+  849 | static int stbiw__zlib_bitrev(int code, int codebits)
+      |            ^~~~~~~~~~~~~~~~~~
+stb_image_write.h:849:12: note: ‘int stbiw__zlib_bitrev(int, int)’ previously defined here
+  849 | static int stbiw__zlib_bitrev(int code, int codebits)
+      |            ^~~~~~~~~~~~~~~~~~
+stb_image_write.h:859:21: error: redefinition of ‘unsigned int stbiw__zlib_countm(unsigned char*, unsigned char*, int)’
+  859 | static unsigned int stbiw__zlib_countm(unsigned char *a, unsigned char *b, int limit)
+      |                     ^~~~~~~~~~~~~~~~~~
+stb_image_write.h:859:21: note: ‘unsigned int stbiw__zlib_countm(unsigned char*, unsigned char*, int)’ previously defined here
+  859 | static unsigned int stbiw__zlib_countm(unsigned char *a, unsigned char *b, int limit)
+      |                     ^~~~~~~~~~~~~~~~~~
+stb_image_write.h:867:21: error: redefinition of ‘unsigned int stbiw__zhash(unsigned char*)’
+  867 | static unsigned int stbiw__zhash(unsigned char *data)
+      |                     ^~~~~~~~~~~~
+stb_image_write.h:867:21: note: ‘unsigned int stbiw__zhash(unsigned char*)’ previously defined here
+  867 | static unsigned int stbiw__zhash(unsigned char *data)
+      |                     ^~~~~~~~~~~~
+stb_image_write.h:895:26: error: redefinition of ‘unsigned char* stbi_zlib_compress(unsigned char*, int, int*, int)’
+  895 | STBIWDEF unsigned char * stbi_zlib_compress(unsigned char *data, int data_len, int *out_len, int quality)
+      |                          ^~~~~~~~~~~~~~~~~~
+stb_image_write.h:895:26: note: ‘unsigned char* stbi_zlib_compress(unsigned char*, int, int*, int)’ previously defined here
+  895 | STBIWDEF unsigned char * stbi_zlib_compress(unsigned char *data, int data_len, int *out_len, int quality)
+      |                          ^~~~~~~~~~~~~~~~~~
+stb_image_write.h:1024:21: error: redefinition of ‘unsigned int stbiw__crc32(unsigned char*, int)’
+ 1024 | static unsigned int stbiw__crc32(unsigned char *buffer, int len)
+      |                     ^~~~~~~~~~~~
+stb_image_write.h:1024:21: note: ‘unsigned int stbiw__crc32(unsigned char*, int)’ previously defined here
+ 1024 | static unsigned int stbiw__crc32(unsigned char *buffer, int len)
+      |                     ^~~~~~~~~~~~
+stb_image_write.h:1077:13: error: redefinition of ‘void stbiw__wpcrc(unsigned char**, int)’
+ 1077 | static void stbiw__wpcrc(unsigned char **data, int len)
+      |             ^~~~~~~~~~~~
+stb_image_write.h:1077:13: note: ‘void stbiw__wpcrc(unsigned char**, int)’ previously defined here
+ 1077 | static void stbiw__wpcrc(unsigned char **data, int len)
+      |             ^~~~~~~~~~~~
+stb_image_write.h:1083:22: error: redefinition of ‘unsigned char stbiw__paeth(int, int, int)’
+ 1083 | static unsigned char stbiw__paeth(int a, int b, int c)
+      |                      ^~~~~~~~~~~~
+stb_image_write.h:1083:22: note: ‘unsigned char stbiw__paeth(int, int, int)’ previously defined here
+ 1083 | static unsigned char stbiw__paeth(int a, int b, int c)
+      |                      ^~~~~~~~~~~~
+stb_image_write.h:1092:13: error: redefinition of ‘void stbiw__encode_png_line(unsigned char*, int, int, int, int, int, int, signed char*)’
+ 1092 | static void stbiw__encode_png_line(unsigned char *pixels, int stride_bytes, int width, int height, int y, int n, int filter_type, signed char *line_buffer)
+      |             ^~~~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:1092:13: note: ‘void stbiw__encode_png_line(unsigned char*, int, int, int, int, int, int, signed char*)’ previously defined here
+ 1092 | static void stbiw__encode_png_line(unsigned char *pixels, int stride_bytes, int width, int height, int y, int n, int filter_type, signed char *line_buffer)
+      |             ^~~~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:1128:25: error: redefinition of ‘unsigned char* stbi_write_png_to_mem(const unsigned char*, int, int, int, int, int*)’
+ 1128 | STBIWDEF unsigned char *stbi_write_png_to_mem(const unsigned char *pixels, int stride_bytes, int x, int y, int n, int *out_len)
+      |                         ^~~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:1128:25: note: ‘unsigned char* stbi_write_png_to_mem(const unsigned char*, int, int, int, int, int*)’ previously defined here
+ 1128 | STBIWDEF unsigned char *stbi_write_png_to_mem(const unsigned char *pixels, int stride_bytes, int x, int y, int n, int *out_len)
+      |                         ^~~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:1215:14: error: redefinition of ‘int stbi_write_png(const char*, int, int, int, const void*, int)’
+ 1215 | STBIWDEF int stbi_write_png(char const *filename, int x, int y, int comp, const void *data, int stride_bytes)
+      |              ^~~~~~~~~~~~~~
+stb_image_write.h:1215:14: note: ‘int stbi_write_png(const char*, int, int, int, const void*, int)’ previously defined here
+ 1215 | STBIWDEF int stbi_write_png(char const *filename, int x, int y, int comp, const void *data, int stride_bytes)
+      |              ^~~~~~~~~~~~~~
+stb_image_write.h:1231:14: error: redefinition of ‘int stbi_write_png_to_func(void (*)(void*, void*, int), void*, int, int, int, const void*, int)’
+ 1231 | STBIWDEF int stbi_write_png_to_func(stbi_write_func *func, void *context, int x, int y, int comp, const void *data, int stride_bytes)
+      |              ^~~~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:1231:14: note: ‘int stbi_write_png_to_func(void (*)(void*, void*, int), void*, int, int, int, const void*, int)’ previously defined here
+ 1231 | STBIWDEF int stbi_write_png_to_func(stbi_write_func *func, void *context, int x, int y, int comp, const void *data, int stride_bytes)
+      |              ^~~~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:1250:28: error: redefinition of ‘const unsigned char stbiw__jpg_ZigZag []’
+ 1250 | static const unsigned char stbiw__jpg_ZigZag[] = { 0,1,5,6,14,15,27,28,2,4,7,13,16,26,29,42,3,8,12,17,25,30,41,43,9,11,18,
+      |                            ^~~~~~~~~~~~~~~~~
+stb_image_write.h:1250:28: note: ‘const unsigned char stbiw__jpg_ZigZag [64]’ previously defined here
+ 1250 | static const unsigned char stbiw__jpg_ZigZag[] = { 0,1,5,6,14,15,27,28,2,4,7,13,16,26,29,42,3,8,12,17,25,30,41,43,9,11,18,
+      |                            ^~~~~~~~~~~~~~~~~
+stb_image_write.h:1253:13: error: redefinition of ‘void stbiw__jpg_writeBits(stbi__write_context*, int*, int*, const short unsigned int*)’
+ 1253 | static void stbiw__jpg_writeBits(stbi__write_context *s, int *bitBufP, int *bitCntP, const unsigned short *bs) {
+      |             ^~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:1253:13: note: ‘void stbiw__jpg_writeBits(stbi__write_context*, int*, int*, const short unsigned int*)’ previously defined here
+ 1253 | static void stbiw__jpg_writeBits(stbi__write_context *s, int *bitBufP, int *bitCntP, const unsigned short *bs) {
+      |             ^~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:1270:13: error: redefinition of ‘void stbiw__jpg_DCT(float*, float*, float*, float*, float*, float*, float*, float*)’
+ 1270 | static void stbiw__jpg_DCT(float *d0p, float *d1p, float *d2p, float *d3p, float *d4p, float *d5p, float *d6p, float *d7p) {
+      |             ^~~~~~~~~~~~~~
+stb_image_write.h:1270:13: note: ‘void stbiw__jpg_DCT(float*, float*, float*, float*, float*, float*, float*, float*)’ previously defined here
+ 1270 | static void stbiw__jpg_DCT(float *d0p, float *d1p, float *d2p, float *d3p, float *d4p, float *d5p, float *d6p, float *d7p) {
+      |             ^~~~~~~~~~~~~~
+stb_image_write.h:1318:13: error: redefinition of ‘void stbiw__jpg_calcBits(int, short unsigned int*)’
+ 1318 | static void stbiw__jpg_calcBits(int val, unsigned short bits[2]) {
+      |             ^~~~~~~~~~~~~~~~~~~
+stb_image_write.h:1318:13: note: ‘void stbiw__jpg_calcBits(int, short unsigned int*)’ previously defined here
+ 1318 | static void stbiw__jpg_calcBits(int val, unsigned short bits[2]) {
+      |             ^~~~~~~~~~~~~~~~~~~
+stb_image_write.h:1328:12: error: redefinition of ‘int stbiw__jpg_processDU(stbi__write_context*, int*, int*, float*, int, float*, int, const short unsigned int (*)[2], const short unsigned int (*)[2])’
+ 1328 | static int stbiw__jpg_processDU(stbi__write_context *s, int *bitBuf, int *bitCnt, float *CDU, int du_stride, float *fdtbl, int DC, const unsigned short HTDC[256][2], const unsigned short HTAC[256][2]) {
+      |            ^~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:1328:12: note: ‘int stbiw__jpg_processDU(stbi__write_context*, int*, int*, float*, int, float*, int, const short unsigned int (*)[2], const short unsigned int (*)[2])’ previously defined here
+ 1328 | static int stbiw__jpg_processDU(stbi__write_context *s, int *bitBuf, int *bitCnt, float *CDU, int du_stride, float *fdtbl, int DC, const unsigned short HTDC[256][2], const unsigned short HTAC[256][2]) {
+      |            ^~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:1398:12: error: redefinition of ‘int stbi_write_jpg_core(stbi__write_context*, int, int, int, const void*, int)’
+ 1398 | static int stbi_write_jpg_core(stbi__write_context *s, int width, int height, int comp, const void* data, int quality) {
+      |            ^~~~~~~~~~~~~~~~~~~
+stb_image_write.h:1398:12: note: ‘int stbi_write_jpg_core(stbi__write_context*, int, int, int, const void*, int)’ previously defined here
+ 1398 | static int stbi_write_jpg_core(stbi__write_context *s, int width, int height, int comp, const void* data, int quality) {
+      |            ^~~~~~~~~~~~~~~~~~~
+stb_image_write.h:1607:14: error: redefinition of ‘int stbi_write_jpg_to_func(void (*)(void*, void*, int), void*, int, int, int, const void*, int)’
+ 1607 | STBIWDEF int stbi_write_jpg_to_func(stbi_write_func *func, void *context, int x, int y, int comp, const void *data, int quality)
+      |              ^~~~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:1607:14: note: ‘int stbi_write_jpg_to_func(void (*)(void*, void*, int), void*, int, int, int, const void*, int)’ previously defined here
+ 1607 | STBIWDEF int stbi_write_jpg_to_func(stbi_write_func *func, void *context, int x, int y, int comp, const void *data, int quality)
+      |              ^~~~~~~~~~~~~~~~~~~~~~
+stb_image_write.h:1616:14: error: redefinition of ‘int stbi_write_jpg(const char*, int, int, int, const void*, int)’
+ 1616 | STBIWDEF int stbi_write_jpg(char const *filename, int x, int y, int comp, const void *data, int quality)
+      |              ^~~~~~~~~~~~~~
+stb_image_write.h:1616:14: note: ‘int stbi_write_jpg(const char*, int, int, int, const void*, int)’ previously defined here
+ 1616 | STBIWDEF int stbi_write_jpg(char const *filename, int x, int y, int comp, const void *data, int quality)
+      |              ^~~~~~~~~~~~~~
+renderer.cpp:333:8: error: redefinition of ‘struct Image’
+  333 | struct Image {
+      |        ^~~~~
+renderer.cpp:14:8: note: previous definition of ‘struct Image’
+   14 | struct Image {
+      |        ^~~~~
