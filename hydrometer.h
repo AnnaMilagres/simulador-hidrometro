@@ -1,28 +1,27 @@
 #ifndef HYDROMETER_H
 #define HYDROMETER_H
 
-#include <cstddef>
+#include <random>
 
 class Hydrometer {
-private:
-    double flow_ml_per_h;     // vazão instantânea
-    double pressure;          // pressão da água
-    double cumulative_ml;     // volume total acumulado
-    double ml_per_pulse;      // quantos ml contam como 1 pulso
-    size_t pulses;            // contador de pulsos
-
 public:
-    Hydrometer(double ml_per_pulse = 100.0);
-
-    void setFlow(double ml_per_h);
-    void setPressure(double p);
+    Hydrometer(double liters_per_second_max = 2.0, double press_min = 1.0, double press_max = 4.0);
 
     void step(double dt_seconds);
 
-    double getFlow() const;
-    double getPressure() const;
-    double getTotalMl() const;
-    size_t getPulses() const;
+    double getInstantLitersPerSec() const;
+    double getPressureBar() const;
+    double getTotalLiters() const;
+
+private:
+    std::mt19937 gen;
+    std::uniform_real_distribution<> consumoDist;
+    std::uniform_real_distribution<> pressaoDist;
+
+    // estado
+    double instant_lps;
+    double pressure_bar;
+    double total_liters;
 };
 
 #endif

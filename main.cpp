@@ -1,47 +1,54 @@
-#include "hydrometer.h"
+// main.cpp - sha v2.0 - controlador simples
 #include <iostream>
-#include <random>
-#include <chrono>
+#include <cmath>
 #include <thread>
+#include <chrono>
 #include <iomanip>
 
+#include "hydrometer.h"
+#include "renderer.h"
+
 int main() {
-    Hydrometer h(50.0); // cada 50 ml conta 1 pulso
+    Hydrometer h(2.0, 1.0, 4.0); // max 2 L/s; pressure 1..4 bar
+    Renderer renderer; // objeto responsável por gerar a imagem
 
-    std::random_device rd;
-    std::mt19937 gen(rd());
+    const double dt = 1.0;
+    double lastSavedLitersFloor = std::floor(h.getTotalLiters());
+    int counter = 0;
 
-    std::uniform_real_distribution<> flowDist(0.0, 120.0);
-
-    std::normal_distribution<> pressureDist(1.0, 0.1);
-
-    const double dt_s = 1.0;
-    long long time_s = 0;
-
-    std::cout << "time(s)\tflow(ml/h)\tpressure\tcumulative_ml\tpulses\n";
+    std::cout << "sha v2.0 iniciado. gerando hydrometer.png quando total aumenta +1 l\n";
 
     while (true) {
-        double newFlow = flowDist(gen);
-        double newPressure = pressureDist(gen);
+        h.step(dt);
+        double total = h.getTotalLiters();
+        double lps = h.getInstantLitersPerSec();
+        double pressure = h.getPressureBar();
 
-        h.setFlow(newFlow);
-        h.setPressure(newPressure);
+        int totalLitersInt = static_cast<int>(total);
+        int litersRest = totalLitersInt % 1000;
+        int centenas = (litersRest / 100) % 10;
+        int dezenas = (litersRest / 10) % 10;
+        int unidades = litersRest % 10;
+        int decimos = static_cast<int>((total - totalLitersInt) * 10.0);
 
-        h.step(dt_s);
+        // console resumido
+        std::cout << "t=" << counter << "s | inst=" << std::fixed << std::setprecision(2)
+                  << lps << " L/s | total=" << std::fixed << std::setprecision(2)
+                  << total << " L | press=" << std::fixed << std::setprecision(2)
+                  << pressure << " bar\n";
 
-        if (h.getFlow() < 0.1) {
-            std::cout << time_s << "\tSEM FLUXO DE AGUA\n";
-        } else {
-            std::cout << time_s << "\t"
-                      << std::fixed << std::setprecision(2)
-                      << h.getFlow() << "\t\t"
-                      << h.getPressure() << "\t\t"
-                      << h.getTotalMl() << "\t"
-                      << h.getPulses() << "\n";
+        // salva/sobrescreve imagem quando cruza novo litro inteiro
+        double currentFloor = std::floor(total);
+        if (currentFloor >= lastSavedLitersFloor + 1.0) {
+            lastSavedLitersFloor = currentFloor;
+            renderer.renderHydrometerPNG("hydrometer.png",
+                                         total, centenas, dezenas, unidades, decimos,
+                                         lps, pressure);
+            std::cout << "imagem atualizada: hydrometer.png (total L = " << total << ")\n";
         }
 
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-        time_s += 1;
+        std::this_thread::sleep_for(std::chrono::milliseconds((int)(dt*1000)));
+        counter++;
     }
 
     return 0;

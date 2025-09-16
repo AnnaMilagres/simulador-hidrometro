@@ -1,45 +1,24 @@
 #include "hydrometer.h"
-#include <cmath>
+#include <chrono>
 
-Hydrometer::Hydrometer(double ml_per_pulse)
-    : flow_ml_per_h(0.0),
-      pressure(1.0),
-      cumulative_ml(0.0),
-      ml_per_pulse(ml_per_pulse),
-      pulses(0) {}
-
-void Hydrometer::setFlow(double ml_per_h) {
-    flow_ml_per_h = ml_per_h;
-}
-
-void Hydrometer::setPressure(double p) {
-    pressure = p;
-}
+Hydrometer::Hydrometer(double liters_per_second_max, double press_min, double press_max)
+    : gen((unsigned)std::chrono::high_resolution_clock::now().time_since_epoch().count()),
+      consumoDist(0.0, liters_per_second_max),
+      pressaoDist(press_min, press_max),
+      instant_lps(0.0),
+      pressure_bar(press_min),
+      total_liters(0.0)
+{}
 
 void Hydrometer::step(double dt_seconds) {
-    double ml_passados = flow_ml_per_h * (dt_seconds / 3600.0);
-    if (ml_passados < 0) ml_passados = 0;
+    // gera novos valores aleatórios
+    instant_lps = consumoDist(gen);
+    pressure_bar = pressaoDist(gen);
 
-    cumulative_ml += ml_passados;
-
-    size_t expected_pulses = static_cast<size_t>(cumulative_ml / ml_per_pulse);
-    if (expected_pulses > pulses) {
-        pulses = expected_pulses;
-    }
+    // acumula volume
+    total_liters += instant_lps * dt_seconds;
 }
 
-double Hydrometer::getFlow() const {
-    return flow_ml_per_h;
-}
-
-double Hydrometer::getPressure() const {
-    return pressure;
-}
-
-double Hydrometer::getTotalMl() const {
-    return cumulative_ml;
-}
-
-size_t Hydrometer::getPulses() const {
-    return pulses;
-}
+double Hydrometer::getInstantLitersPerSec() const { return instant_lps; }
+double Hydrometer::getPressureBar() const { return pressure_bar; }
+double Hydrometer::getTotalLiters() const { return total_liters; }

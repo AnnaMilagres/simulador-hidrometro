@@ -24,4 +24,4 @@ outputType = "console"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "g++ -o main main.cpp hydrometer.cpp && ./main"
+args = "g++ -o main main.cpp hydrometer.cpp renderer.cpp && ./main"
