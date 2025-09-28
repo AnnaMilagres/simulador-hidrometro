@@ -15,6 +15,7 @@ A cada incremento de 1 litro no total, o arquivo `hydrometer.png` é (re)gerado.
 ├── main                      # exemplo simples em console (sem render)
 ├── main.cpp                  # exemplo alternativo de simulação via console
 ├── background.png / hydrometer.png
+├── medicoes_hidrometros # armazena as imagens geradas pelo simulador
 ├── src/
 │   ├── external/
 │   │   ├── stb_image.h
@@ -43,3 +44,26 @@ A cada incremento de 1 litro no total, o arquivo `hydrometer.png` é (re)gerado.
 
 O diagrama de classes do SHA 2.0 foi produzido usando PlantText.
 Link oficial: [https://planttext.com](https://www.planttext.com/)
+
+**# Alterações - SHA (Simulador de Hidrômetro Analógico) versão 3**
+
+Na v3, o projeto é reformulado para atender à demanda de exibir cinco hidrômetros simultâneos, e não apenas um. As alterações realizadas foram, na verdade, uma reestruturação completa do main.cpp, para introduzir o paralelismo e a simulação de múltiplos hidrômetros.
+
+<h4>➔ Estrutura e Inclusões</h4>
+<ul>
+    <li>Inclusões</li>
+  <ul>
+    <li>#include <vector>, #include <thread>, #include <tuple>, #include <algorithm>: permite a criação e gerenciamento de múltiplas threads e a configuração de múltiplos hidrômetros usando std::vector e std::tuple.; </li>
+    <li>Novo diretório: criação de um novo diretório, nomeado de 'medicoes_hidrometros', para armazenar as imagens geradas pelo simulador. </li></ul>
+  <li>Globalização</li>
+  <ul>
+    <li>Renderer globalRenderer: cria uma única instância do Renderer fora das threads. Embora cada thread renderize um arquivo diferente, a instância é compartilhada; </li></ul>
+</ul> 
+
+<h4>➔ Migração da Lógica Principal para Threads</h4>
+<ul>
+    <li>A função main() anterior, que continha o loop while(true), foi dividida em duas partes:</li>
+  <ul>
+    <li>Nova Função simular_hidrometro (O Corpo da Thread)</li>
+    <li>O novo main() assume o papel de orquestrador, em vez de simulador.</li> </ul>
+</ul> 

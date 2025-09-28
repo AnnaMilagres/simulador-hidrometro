@@ -1,19 +1,31 @@
-// renderer.cpp - implementação do renderer usando módulos organizados
+// renderer.cpp - implementação do renderer usando módulos
 #include "renderer.h"
 #include "graphics/image.h"
 #include "graphics/drawing.h"
 #include "graphics/text.h" 
 #include "graphics/display.h"
 #include <cmath>
+#include <string>
+#include <iostream>
+
+// Adicionado para corrigir erro de compilação do valor de π
+#ifndef M_PI
+    #define M_PI 3.14159265358979323846
+#endif
 
 // stb imagem writer (definição apenas aqui)
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "external/stb_image_write.h"
 
+const char* OUTPUT_DIR = "medicoes_hidrometros";
+
 void Renderer::renderHydrometerPNG(const std::string &filename,
                                    double totalLiters,
                                    int centenas, int dezenas, int unidades, int decimos,
                                    double instantLps, double pressure) {
+
+    std::string full_path = std::string(OUTPUT_DIR) + "/" + filename;
+
     const int W = 600, H = 400;
     Image img(W, H, 255, 255, 255);
 
@@ -52,6 +64,10 @@ void Renderer::renderHydrometerPNG(const std::string &filename,
     drawSmall(baseX, baseY+100, unidades, "x0.001");
     drawSmall(baseX+90, baseY+100, decimos, "x0.0001");
 
-    // --- salvar ---
-    stbi_write_png(filename.c_str(), img.w, img.h, 3, img.data.data(), img.w*3);
+    // --- salvar no caminho completo ---
+    if (stbi_write_png(full_path.c_str(), img.w, img.h, 3, img.data.data(), img.w*3)) {
+        std::cout << "IMAGEM SALVA em: " << full_path << std::endl;
+    } else {
+        std::cerr << "ERRO: Falha ao salvar imagem PNG em: " << full_path << std::endl;
+    }
 }
