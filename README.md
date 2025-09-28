@@ -8,6 +8,8 @@ Simulador simples de consumo de água com geração de imagem PNG de um hidrôme
 
 A cada incremento de 1 litro no total, o arquivo `hydrometer.png` é (re)gerado.
 
+<p align="center"> ___________________________________________________ </p>
+
 **# Estrutura do Projeto**
 
 ```
@@ -30,6 +32,7 @@ A cada incremento de 1 litro no total, o arquivo `hydrometer.png` é (re)gerado.
 │   └── main.cpp             # loop principal (gera hydrometer.png)
 └── README.md
 ```
+<p align="center"> ___________________________________________________ </p>
 
 **# Parâmetros e Lógica**
 
@@ -40,10 +43,14 @@ A cada incremento de 1 litro no total, o arquivo `hydrometer.png` é (re)gerado.
 - `src/main.cpp`
   - Loop com `dt = 1s`; quando `floor(totalLiters)` aumenta, chama o `Renderer` para salvar `hydrometer.png`.
 
+<p align="center"> ___________________________________________________ </p>
+
 **# Ferramenta utilizada para o Diagrama**
 
 O diagrama de classes do SHA 2.0 foi produzido usando PlantText.
 Link oficial: [https://planttext.com](https://www.planttext.com/)
+
+<p align="center"> ___________________________________________________ </p>
 
 **# Alterações - SHA (Simulador de Hidrômetro Analógico) versão 3**
 
